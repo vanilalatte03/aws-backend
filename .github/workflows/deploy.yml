@@ -21,6 +21,11 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build and test
+        env:
+          SPRING_PROFILES_ACTIVE: local
+          AWS_REGION: ${{ vars.AWS_REGION }}
+          AWS_DEFAULT_REGION: ${{ vars.AWS_REGION }}
+          CLOUD_AWS_S3_BUCKET: member-profile-images-jh
         run: ./gradlew clean test bootJar
 
       - name: Login to Docker Hub
