@@ -21,9 +21,15 @@ public class Member {
 
     private String mbti;
 
+    private String profileImageKey;
+
     public Member(String name, int age, String mbti) {
         this.name = name;
         this.age = age;
         this.mbti = mbti;
+    }
+
+    public void updateProfileImageKey(String profileImageKey) {
+        this.profileImageKey = profileImageKey;
     }
 }
