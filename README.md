@@ -1,5 +1,45 @@
 # AWS 기반 팀원 프로필 관리 서비스
 
+## 프로젝트 소개
+
+팀원 프로필 정보를 등록하고 조회할 수 있는 Spring Boot 기반 백엔드 서비스입니다. 회원 기본 정보는 RDS MySQL에 저장하고, 프로필 이미지는 S3에 업로드한 뒤 Presigned URL 또는 CloudFront를 통해 안전하게 조회할 수 있도록 구성했습니다.
+
+이 프로젝트는 단일 서버 배포에서 시작해 RDS, S3, IAM Role, Docker, GitHub Actions, ALB, Auto Scaling Group, Route 53, ACM, CloudFront까지 단계적으로 AWS 인프라를 확장한 실습 프로젝트입니다.
+
+## 주요 기능
+
+- 회원 생성 및 단건 조회
+- 회원 프로필 이미지 S3 업로드
+- 7일 만료 Presigned URL 발급
+- Actuator 기반 Health Check와 Info 조회
+- Docker 이미지 기반 배포 자동화
+- ALB, ASG, HTTPS 도메인, CloudFront CDN 구성
+
+## API 요약
+
+- 로컬 Base URL: `http://localhost:8080`
+- 운영 Base URL: `https://api.jiholim.pro`
+- 상세 API 명세: [`docs/API.md`](dosc/API.md)
+
+| Method | Path | 설명 |
+| --- | --- | --- |
+| `POST` | `/api/members` | 회원 생성 |
+| `GET` | `/api/members/{id}` | 회원 단건 조회 |
+| `POST` | `/api/members/{id}/profile-image` | 프로필 이미지 업로드 |
+| `GET` | `/api/members/{id}/profile-image` | 프로필 이미지 Presigned URL 발급 |
+| `GET` | `/actuator/health` | 애플리케이션 상태 확인 |
+| `GET` | `/actuator/info` | 애플리케이션 정보 조회 |
+
+## 기술 스택
+
+- Java 17
+- Spring Boot 4
+- Spring Data JPA
+- H2, MySQL RDS
+- AWS S3, Parameter Store, IAM Role
+- Docker, GitHub Actions
+- ALB, Auto Scaling Group, Route 53, ACM, CloudFront
+
 ## LV0. AWS Budgets 설정
 
 ![LV0](image/lv0.png)
